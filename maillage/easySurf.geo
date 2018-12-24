@@ -1,3 +1,4 @@
+Mesh.MshFileVersion = 2.2;
 h=0.5;
 Point(1) = {-0.5,-0.5,0,h};
 Point(2) = {-0.5,0.5,0,h};
