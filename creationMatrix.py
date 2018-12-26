@@ -1,7 +1,7 @@
-from scipy import sparse 
+from scipy import sparse
 
-def creationA(Triangles, Points)
-	A = sparse.lil_matrix((range(Points), range(Points))) 
+def creationA(Triangles, Points):
+	A = sparse.lil_matrix((range(Points), range(Points)))
 	for K in Triangles:
 		for i in range(K):
 			for j in range(K):
@@ -10,3 +10,5 @@ def creationA(Triangles, Points)
 		  B[i] += l_{p}(phi_I)$ // forme l(.) restreinte au triangle K_p
 
 
+if __name__ == 'main':
+	creationA([],[])
