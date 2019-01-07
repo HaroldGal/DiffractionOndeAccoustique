@@ -28,3 +28,6 @@ Line Loop(1) = {1,2,3,4};
 Line Loop(2) = {5,6,7,8};
 Plane Surface(2) = {2,1};
 Physical Surface(1) = {2};
+Physical Line(2) = {1};
+Physical Line(3) = {2};
+
