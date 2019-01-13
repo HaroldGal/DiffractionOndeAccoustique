@@ -3,7 +3,7 @@ from numpy import array
 from numpy import append as np_app
 from math import cos
 import numpy as np
-
+from LectureFichier import *
 def phi():
 	return
 
@@ -14,7 +14,7 @@ def g(x,y):
 	return cos(x)*cos(y)+1
 
 class Solver:
-	def __init__(self, _triangles, _points, _bord_in, _bord_out):
+	def __init__(self, _triangles, _points, _bord_in,_bord_out):
 		self.triangles = _triangles
 		self.points = _points
 		self.bord_in = _bord_in
@@ -57,7 +57,7 @@ class Solver:
 
 		ind = []
 		data = []
-		for A in self.bords:
+		for A in self.bord_out:
 			(x1,x2) = (self.points[A[0]], self.points[A[1]])
 			xm = [(x1[0]-x2[0])/2.0,(x1[1]-x2[1])/2.0]
 			taille = np.sqrt((x2[0]-x1[0])**2 + (x2[1]-x1[1])**2)
@@ -72,7 +72,9 @@ class Solver:
 		np.linalg.solve(self.M+self.D, self.b)
 
 if __name__ == '__main__':
-	a = Solver([[0,1,2]],[[0.,0.],[1.0,0.],[0.,1.0]])
+	liste_position,liste_triangle,bords=lectureFichier()
+	a = Solver(liste_triangle,liste_position,bords,bords)
+	#a = Solver([[0,1,2]],[[0.,0.],[1.0,0.],[0.,1.0]],bords,bords)
 	a.creationMatriceMass()
 	a.creationMatriceRigidite()
 	print(a.D.toarray())

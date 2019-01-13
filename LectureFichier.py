@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 def lectureFichier():
 	dicodesTriangles={}
-	fichier = open("maillage/easySurf.msh","r")
+	fichier = open("maillage/easySurftest.msh","r")
 	liste_lines=fichier.readlines()
 	compteur=0
 	while liste_lines[compteur].rstrip("\n\r")!='$Nodes':
@@ -23,7 +23,7 @@ def lectureFichier():
 	for i in range(debuttriangle+1,debuttriangle+nb_triangle+1):
 		position_courante=map(int, liste_lines[i].split(' '))
 		#decalage de 1 de la numérotation initiale , on consdiere qu'il y a un sommet 0
-		#on differencie bords et triangle
+		#on differencie bords et triangel
 		if position_courante[1]==2:
 			tuple_temp=(position_courante[5]-1,position_courante[6]-1,position_courante[7]-1)
 			liste_triangle.append(tuple_temp)
