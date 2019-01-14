@@ -26,7 +26,7 @@ class Solver:
 		data = []
 		for K in self.triangles:
 			(x1,x2,x3) = (self.points[K[0]], self.points[K[1]], self.points[K[2]])
-			aireK = ((x2[0]-x1[0])*(x3[1]-x1[1]) - (x3[0]-x1[0])*(x2[1]-x1[1]))/2.
+			aireK = abs(((x2[0]-x1[0])*(x3[1]-x1[1]) - (x3[0]-x1[0])*(x2[1]-x1[1]))/2.)
 			for i in range(len(K)):
 				for j in range(len(K)):
 					row_ind.append(K[i])
@@ -43,7 +43,7 @@ class Solver:
 		data = []
 		for K in self.triangles:
 			(x1,x2,x3) = (self.points[K[0]], self.points[K[1]], self.points[K[2]])
-			aireK = ((x2[0]-x1[0])*(x3[1]-x1[1]) - (x3[0]-x1[0])*(x2[1]-x1[1]))/2.
+			aireK = abs(((x2[0]-x1[0])*(x3[1]-x1[1]) - (x3[0]-x1[0])*(x2[1]-x1[1]))/2.)
 			B = 1./(2.*aireK) * np.matrix([[x3[1]-x1[1], x1[1]-x2[1]], [x1[0]-x3[0],x2[0]-x1[0]]])
 			transform = B.getT()*B
 			for i in range(len(K)):
@@ -74,7 +74,9 @@ class Solver:
 if __name__ == '__main__':
 	liste_position,liste_triangle,bords=lectureFichier()
 	a = Solver(liste_triangle,liste_position,bords,bords)
-	#a = Solver([[0,1,2]],[[0.,0.],[1.0,0.],[0.,1.0]],bords,bords)
+	#a = Solver([[2,1,0]],[[0.,0.],[1.0,0.],[0.,1.0]],bords,bords)
 	a.creationMatriceMass()
 	a.creationMatriceRigidite()
 	print(a.D.toarray())
+	print(np.matmul(np.matmul(np.ones(62),a.M.toarray()),np.ones(62)))
+
