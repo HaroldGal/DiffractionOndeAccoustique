@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-def lectureFichier():
+def lectureFichier(name_file):
 	dicodesTriangles={}
-	fichier = open("maillage/easySurftest.msh","r")
+	fichier = open(name_file,"r")
 	liste_lines=fichier.readlines()
 	compteur=0
 	while liste_lines[compteur].rstrip("\n\r")!='$Nodes':

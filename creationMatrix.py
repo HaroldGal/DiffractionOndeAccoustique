@@ -3,7 +3,7 @@ from numpy import array
 from numpy import append as np_app
 from math import cos
 import numpy as np
-from LectureFichier import *
+
 def phi():
 	return
 
@@ -11,7 +11,7 @@ def f(x,y):
 	return cos(x)*cos(y)
 
 def g(x,y):
-	return cos(x)*cos(y)+1
+	return (cos(x)*cos(y)+1)
 
 class Solver:
 	def __init__(self, _triangles, _points, _bord_in,_bord_out):
@@ -55,28 +55,15 @@ class Solver:
 
 	def creationVecteurB(self):
 
-		ind = []
-		data = []
+		self.b = np.zeros(len(self.points))
+
 		for A in self.bord_out:
 			(x1,x2) = (self.points[A[0]], self.points[A[1]])
 			xm = [(x1[0]-x2[0])/2.0,(x1[1]-x2[1])/2.0]
 			taille = np.sqrt((x2[0]-x1[0])**2 + (x2[1]-x1[1])**2)
 			quad = taille/6.0 * (g(x1[0],x1[1]) + 4.*g(xm[0],xm[1])+ g(x2[0],x2[1]))
-			for i in range(len(A)):
-				row_ind.append(K[i])
-				col_ind.append(1)
-				data.append(quad)
-		self.b = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),1)).tocsr()
+			for i in A:
+				self.b[i] = quad
 
 	def solve(self):
-		np.linalg.solve(self.M+self.D, self.b)
-
-if __name__ == '__main__':
-	liste_position,liste_triangle,bords=lectureFichier()
-	a = Solver(liste_triangle,liste_position,bords,bords)
-	#a = Solver([[2,1,0]],[[0.,0.],[1.0,0.],[0.,1.0]],bords,bords)
-	a.creationMatriceMass()
-	a.creationMatriceRigidite()
-	print(a.D.toarray())
-	print(np.matmul(np.matmul(np.ones(62),a.M.toarray()),np.ones(62)))
-
+		self.U  = np.linalg.solve((self.M+self.D).toarray(), self.b)
