@@ -19,7 +19,8 @@ def lectureFichier(name_file):
 	debuttriangle=nb_point+compteur+4
 	nb_triangle=int(liste_lines[debuttriangle].rstrip("\n\r"))
 	liste_triangle=[]
-	bords=[]
+	bords_in=[]
+	bords_out=[]
 	for i in range(debuttriangle+1,debuttriangle+nb_triangle+1):
 		position_courante=map(int, liste_lines[i].split(' '))
 		#decalage de 1 de la numérotation initiale , on consdiere qu'il y a un sommet 0
@@ -28,7 +29,11 @@ def lectureFichier(name_file):
 			tuple_temp=(position_courante[5]-1,position_courante[6]-1,position_courante[7]-1)
 			liste_triangle.append(tuple_temp)
 		elif position_courante[1]==1:
-			tuple_temp=(position_courante[4]-1,position_courante[5]-1,position_courante[6]-1)
-			bords.append(tuple_temp)
+			if position_courante[3]==2:
+				tuple_temp=(position_courante[5]-1,position_courante[6]-1)
+				bords_in.append(tuple_temp)
+			else:
+				tuple_temp=(position_courante[5]-1,position_courante[6]-1)
+				bords_out.append(tuple_temp)
 	
-	return (liste_position,liste_triangle,bords)
+	return (liste_position,liste_triangle,bords_in,bords_out)

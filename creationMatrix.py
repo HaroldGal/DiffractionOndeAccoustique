@@ -57,7 +57,7 @@ class Solver:
 
 		self.b = np.zeros(len(self.points))
 
-		for A in self.bord_out:
+		for A in self.bord_in:
 			(x1,x2) = (self.points[A[0]], self.points[A[1]])
 			xm = [(x1[0]-x2[0])/2.0,(x1[1]-x2[1])/2.0]
 			taille = np.sqrt((x2[0]-x1[0])**2 + (x2[1]-x1[1])**2)
