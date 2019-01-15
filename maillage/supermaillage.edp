@@ -1,0 +1,30 @@
+
+// Parameters
+int nbseg=10;
+real R=1, xc=0, yc=0, R2=R/2;
+// border
+border circle1(t=0,2*pi){label=1;x=xc+R*cos(t);
+y=yc+R2*sin(t);}
+
+border circle2(t=0,2*pi){
+				label=2;
+				x=xc+R2/4*cos(t);
+				y=yc+R2/4*sin(t);}
+
+///plot(circle1(nbseg*2*pi*R)+circle2(nbseg*2*pi*R2)+C1(nbseg),cmm="border");
+/// function
+
+func g = cos(x)*cos(y)+1; 
+
+
+
+mesh Th = buildmesh(circle1(nbseg*2*pi*R)+circle2(-nbseg*2*pi*R2));
+
+fespace Vh(Th, P1);
+Vh uh,vh; // vh sera la fonction test
+
+solve MonProbleme(uh,vh) = int2d(Th)(dx(uh)*dx(vh)) + int2d(Th)(dy(uh)*dy(vh)) + int2d(Th)(uh*vh) - int1d(Th,circle2)(g*vh);
+
+///plot(Th, cmm="mesh of a circle with subdomain");
+plot(uh, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
+
