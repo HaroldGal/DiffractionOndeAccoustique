@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import numpy as np
 def createVisu(X, posPoints, triangles): # X champ scalaire
 	file = open("out.vtu","w")
 	file.write('<VTKFile type="UnstructuredGrid" version="1.0" byte_order="LittleEndian" header_type="UInt64">\n')
@@ -31,7 +31,11 @@ def createVisu(X, posPoints, triangles): # X champ scalaire
 
 	file.write('</DataArray>\n</Cells>\n<PointData Scalars="solution">\n<DataArray type="Float64" Name="Real part" format="ascii">\n')
 	for i in X:
-		file.write(str(i) + "\n")
+		file.write(str(np.real(i)) + "\n")
+	file.write('</DataArray>\n')
+	file.write('<DataArray type="Float64" Name="Imag part" format="ascii">\n')
+	for i in X:
+		file.write(str(np.imag(i)) + "\n")
 	file.write('</DataArray>\n')
 
 	file.write('</PointData>\n</Piece>\n</UnstructuredGrid>\n</VTKFile>\n')
