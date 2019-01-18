@@ -1,5 +1,5 @@
 Mesh.MshFileVersion = 2.2;
-h=0.5;
+h=1/15;
 Point(1) = {-0.5,-0.5,0,h};
 Point(2) = {-0.5,0.5,0,h};
 Point(3) = {0.5,0.5,0,h};
@@ -26,7 +26,7 @@ Ellipse(8) = {10,5,6,7};
 
 Line Loop(1) = {1,2,3,4};
 Line Loop(2) = {5,6,7,8};
-Plane Surface(2) = {2,1};
+Plane Surface(2) = {1,2};
 Physical Surface(1) = {2};
 Physical Line(2) = {1, 2, 3, 4};
 Physical Line(3) = {5, 6, 7, 8};

@@ -1,0 +1,44 @@
+// GMSH export
+func int gmshExport(mesh &Th, complex[int] &uh, string filename)
+{
+  fespace femp1(Th,P1);
+  femp1 Thx=x,Thy=y; //  hack of get vertex coordinates
+  ofstream f(filename); // Modifier le nom du fichier de sortie selon vos souhaits
+  f<< "View 'u'{" << "\n";
+  for(int i =0; i < Th.nt; i++)
+    {
+      int a = Th[i][0];
+      int b = Th[i][1];
+      int c = Th[i][2];
+      //Get vertices number
+      f<< "ST("
+       << Thx[][a] << "," << Thy[][a] << ",0,"
+       << Thx[][b] << "," << Thy[][b] << ",0,"
+       << Thx[][c] << "," << Thy[][c] << ",0"
+       << "){" << real(uh[a])<< "," << real(uh[b])<<"," << real(uh[c]) << "," << imag(uh[a])<< "," << imag(uh[b])<<"," << imag(uh[c]) << "};\n";
+    }
+  f << "TIME{0,1};"<<"\n";
+  f << "};"<<endl;
+}
+
+func int gmshExport(mesh &Th, real[int] &uh, string filename)
+{
+  fespace femp1(Th,P1);
+  femp1 Thx=x,Thy=y; //  hack of get vertex coordinates
+  ofstream f(filename); // Modifier le nom du fichier de sortie selon vos souhaits
+  f<< "View 'u'{" << "\n";
+  for(int i =0; i < Th.nt; i++)
+    {
+      int a = Th[i][0];
+      int b = Th[i][1];
+      int c = Th[i][2];
+      //Get vertices number
+      f<< "ST("
+       << Thx[][a] << "," << Thy[][a] << ",0,"
+       << Thx[][b] << "," << Thy[][b] << ",0,"
+       << Thx[][c] << "," << Thy[][c] << ",0"
+       << "){" << uh[a]<< "," << uh[b]<<"," << uh[c] << "," << 0<< "," << 0<<"," << 0 << "};\n";
+    }
+  f << "TIME{0,1};"<<"\n";
+  f << "};"<<endl;
+}

@@ -4,7 +4,7 @@ from numpy import append as np_app
 from math import cos,sqrt,sin
 from cmath import exp
 import numpy as np
-alpha=0.5
+alpha=0.9
 def phi():
 	return
 
@@ -73,7 +73,7 @@ class Solver:
 		data=Dtemp.flatten()
 		print(data.shape)
 		self.M =csr_matrix(Dtemp)
-		print(self.M.shape)	
+		print(self.M.toarray())	
 	# A REVOIR
 	def creationMatriceRigidite(self):
 		phi = [np.matrix([[-1],[-1]]),np.matrix([[1],[0]]),np.matrix([[0],[1]])]
