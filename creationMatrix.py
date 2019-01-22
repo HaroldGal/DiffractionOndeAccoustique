@@ -15,7 +15,7 @@ def g(x,y):
 	return (cos(x)*cos(y)+1)
 def uinc(x,y):
 	k=2*np.pi
-	return  exp(np.complex(0,1)*k*(x*cos(alpha)+y*sin(alpha)))
+	return  -exp(np.complex(0,1)*k*(x*cos(alpha)+y*sin(alpha)))
 
 class Solver:
 	def __init__(self, _triangles, _points, _bord_in,_bord_out):
@@ -61,19 +61,8 @@ class Solver:
 					col_ind.append(K[j])
 					data.append(-np.complex(0,1)*k*sigma/6. * (2 if i==j else 1))
 		self.M = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()
-		print(self.M.shape)	
 		Dtemp=self.M.toarray()
-		for btest in self.bord_in:
-			Dtemp[btest[0],:]=0
-			Dtemp[:,btest[0]]=0
-			Dtemp[btest[0],btest[0]]=1
-			Dtemp[btest[1],:]=0
-			Dtemp[:,btest[1]]=0
-			Dtemp[btest[1],btest[1]]=1
-		data=Dtemp.flatten()
-		print(data.shape)
-		self.M =csr_matrix(Dtemp)
-		print(self.M.toarray())	
+		
 	# A REVOIR
 	def creationMatriceRigidite(self):
 		phi = [np.matrix([[-1],[-1]]),np.matrix([[1],[0]]),np.matrix([[0],[1]])]
@@ -116,5 +105,20 @@ class Solver:
 			print(value1)
 			self.b[A[0]]=value1
 			self.b[A[1]]=value2
+	def creationMatriceA(self):
+		Dtemp=(self.M+self.D).toarray()
+		for btest in self.bord_in:
+			Dtemp[btest[0],:]=0
+			Dtemp[:,btest[0]]=0
+			Dtemp[btest[0],btest[0]]=1
+			Dtemp[btest[1],:]=0
+			Dtemp[:,btest[1]]=0
+			Dtemp[btest[1],btest[1]]=1
+		data=Dtemp.flatten()
+		print(data.shape)
+		self.A =csr_matrix(Dtemp)
+
 	def solve(self):
 		self.U  = np.linalg.solve((self.M+self.D).toarray(), self.b)
+	def newsolve(self):
+		self.U  = np.linalg.solve((self.A).toarray(), self.b)
