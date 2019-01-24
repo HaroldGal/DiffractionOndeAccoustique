@@ -1,9 +1,9 @@
 
 // Parameters
-int nbseg=10;
+int nbseg=50;
 real R=1, xc=0, yc=0, R2=R/2;
-real k=2*pi;
-real alpha=0.5;
+real k=2.248;
+real alpha=pi/2.0;
 
 
 // border
@@ -18,8 +18,8 @@ border circle2(t=0,2*pi){
 /// function
 
 
-func uinc = exp(1i*k*(x*cos(alpha) + y*sin(alpha)));
-
+///func uinc = exp(1i*k*(x*cos(alpha) + y*sin(alpha)));
+func uinc = sin(k*x/2.0)*sin(k*y/2.0);
 
 
 
@@ -28,13 +28,13 @@ mesh Th = buildmesh(circle1(nbseg*2*pi*R)+circle2(-nbseg*2*pi*R2));
 fespace Vh(Th, P1);
 Vh<complex> uh,vh;
 
-solve MonProbleme(uh,vh) = -int2d(Th)(dx(uh)*dx(vh)) - int2d(Th)(dy(uh)*dy(vh)) - int2d(Th)(k*k*uh*vh) + int1d(Th,circle2)(-1i*k*uh*vh) + on(circle2, uh=uinc);
+solve MonProbleme(uh,vh) = -int2d(Th)(dx(uh)*dx(vh)) - int2d(Th)(dy(uh)*dy(vh)) + int2d(Th)(k*k*uh*vh) - int1d(Th,circle1)(1i*k*uh*vh) + on(circle2, uh=-uinc);
 
 ///plot(Th, cmm="mesh of a circle with subdomain");
 Vh<complex> uabs = abs(uh + uinc);
 Vh<complex> ure = real(uh);
 //plot(uabs, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
-plot(uh, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
+plot(uabs, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
 include "gmshExport.idp";
 gmshExport(Th, uh[], "uh.pos");
 gmshExport(Th, ure[], "ure.pos");
