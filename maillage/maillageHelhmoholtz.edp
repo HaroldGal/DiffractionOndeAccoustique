@@ -23,8 +23,8 @@ func uinc = sin(k*x/2.0)*sin(k*y/2.0);
 
 
 
-mesh Th = buildmesh(circle1(nbseg*2*pi*R)+circle2(-nbseg*2*pi*R2));
-
+ load "gmsh";
+  mesh Th=gmshload("easySurf.msh");
 fespace Vh(Th, P1);
 Vh<complex> uh,vh;
 
