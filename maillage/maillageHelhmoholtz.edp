@@ -20,6 +20,7 @@ border circle2(t=0,2*pi){
 
 ///func uinc = exp(1i*k*(x*cos(alpha) + y*sin(alpha)));
 func uinc = sin(k*x/2.0)*sin(k*y/2.0);
+//func uinc = x;
 
 
 
@@ -35,7 +36,7 @@ Vh<complex> uabs = abs(uh + uinc);
 Vh<complex> ure = real(uh);
 Vh<complex> uim = imag(uh);
 //plot(uim, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
-plot(ure, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
+plot(uabs, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
 //plot(uabs, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
 include "gmshExport.idp";
 gmshExport(Th, uh[], "uh.pos");
