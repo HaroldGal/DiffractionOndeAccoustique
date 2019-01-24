@@ -6,14 +6,7 @@ from cmath import exp
 import numpy as np
 alpha=0.9
 
-def phi():
-	return
 
-def f(x,y):
-	return cos(x)*cos(y)
-
-def g(x,y):
-	return (cos(x)*cos(y)+1)
 def uinc(x,y):
 	k=2.248
 	#return  -exp(np.complex(0,1)*k*(x*cos(alpha)+y*sin(alpha)))
@@ -52,7 +45,7 @@ class Solver:
 				for j in range(len(K)):
 					row_ind.append(K[i])
 					col_ind.append(K[j])
-					data.append(k*k*aireK/12. * (2 if i==j else 1))
+					data.append(np.complex(1,0)*k*k*aireK/12. * (2 if i==j else 1))
 
 		for K in self.bord_out:
 			(x1,x2) = (self.points[K[0]], self.points[K[1]])
@@ -109,10 +102,10 @@ class Solver:
 		Dtemp=(self.M+self.D).toarray()
 		for btest in self.bord_in:
 			Dtemp[btest[0],:]=0
-			Dtemp[:,btest[0]]=0
+			#Dtemp[:,btest[0]]=0
 			Dtemp[btest[0],btest[0]]=1
 			Dtemp[btest[1],:]=0
-			Dtemp[:,btest[1]]=0
+			#Dtemp[:,btest[1]]=0
 			Dtemp[btest[1],btest[1]]=1
 		#data=Dtemp.flatten()
 		#print(data.shape)
