@@ -33,7 +33,7 @@ class Solver:
 					data.append(aireK/12. * (2 if i==j else 1))
 		self.M = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()
 
-	def creationMatriceMassTest(self):
+	def creationMatriceMasseHelmholtz(self):
 		row_ind = []
 		col_ind = []
 		data = []
@@ -49,6 +49,13 @@ class Solver:
 					mydata=(np.complex(1,0)*k*k*aireK/12. * (2 if i==j else 1))
 					data.append(mydata)
 		
+		self.M = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()
+	
+	def creationMatriceMasseBordHelmholtz(self):
+		row_ind = []
+		col_ind = []
+		data = []
+		k=50 #nombre onde
 		for K in self.bord_out:
 			(x1,x2) = (self.points[K[0]], self.points[K[1]])
 			sigma = np.sqrt((x2[0]-x1[0])**2 + (x2[1]-x1[1])**2)
@@ -58,8 +65,9 @@ class Solver:
 					col_ind.append(K[j])
 					mydata=np.complex(0,1)*k*sigma/6* (2 if i==j else 1)
 					data.append(mydata)
-		self.M = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()
-		
+
+		self.Mbord = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()
+
 	def creationMatriceRigidite(self):
 		phi = [np.matrix([[-1],[-1]]),np.matrix([[1],[0]]),np.matrix([[0],[1]])]
 		row_ind = []
@@ -94,7 +102,7 @@ class Solver:
 			for i in A:
 				self.b[i] = quad
 
-	def creationVecteurBtest(self):
+	def creationVecteurBHelmholtz(self):
 
 		self.b = np.zeros(len(self.points),np.complex128)
 
@@ -105,8 +113,8 @@ class Solver:
 			self.b[aret[0]]=value1
 			self.b[aret[1]]=value2
 
-	def creationMatriceA(self):
-		Dtemp=(self.M+self.D).toarray()
+	def creationMatriceAHelmholtz(self):
+		Dtemp=(self.M+self.D+self.Mbord).toarray()
 		for btest in self.bord_in:
 			Dtemp[btest[0],:]=0
 			#Dtemp[:,btest[0]]=0
@@ -122,8 +130,9 @@ class Solver:
 		self.U  = np.linalg.solve((self.M+self.D).toarray(), self.b)
 
 	def newsolve(self):
+		#on recupere la solution
 		self.U  = np.linalg.solve((self.A).toarray(), self.b)
-		
+		#on recree le champ physique en parcourant tous les points
 		for i  in range(len(self.points)):
 			(x1,x2,x3)=self.points[i]
 			self.U[i]=abs(self.U[i]+uinc(x1,x2))
