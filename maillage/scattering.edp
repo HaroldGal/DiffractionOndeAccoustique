@@ -1,0 +1,32 @@
+include "gmshExport.idp";
+
+real k = 10;
+real alpha = 0;
+//func uinc = cos(k*alpha*x) + 1i*sin(k*alpha*x);
+func uinc = exp(1i*k*(x*cos(alpha) + y*sin(alpha)));
+
+real R1 = 1;
+real R2 = 3;
+
+border C1(t=0,2*pi){x=R1*cos(t); y = R1*sin(t);}
+border C2(t=0,2*pi){x=R2*cos(t); y = R2*sin(t);}
+
+int nlambda = 20;
+int nc1 = floor(k*nlambda*R1);
+int nc2 = floor(k*nlambda*R2);
+
+//Solution de référence
+mesh Th = buildmesh(C1(-nc1) + C2(nc2));
+//plot(Th, wait =1);
+
+fespace Vh(Th, P1);
+Vh<complex> uh,vh;
+solve Helmholtz (uh , vh, solver=LU) = int2d ( Th ) ( dx ( uh ) * dx ( vh ) ) + int2d ( Th ) ( dy ( uh ) * dy ( vh ) )  -  int2d ( Th ) ( k*k*uh  * vh  ) - int1d ( Th, C2 ) (  1i*k*uh* vh ) + on(C1,uh=uinc);
+
+Vh<complex> uabs = abs(uh + uinc);
+Vh<complex> ure = real(uh);
+plot(ure, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
+gmshExport(Th, uh[], "uh.pos");
+gmshExport(Th, ure[], "ure.pos");
+gmshExport(Th, uabs[], "uabs.pos");
+
