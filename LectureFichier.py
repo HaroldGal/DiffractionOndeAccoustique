@@ -14,7 +14,7 @@ def lectureFichier(name_file):
 		position_courante=map(float, liste_lines[i].split(' '))
 		tuple_temp=(position_courante[1],position_courante[2],position_courante[3])
 		liste_position.append(tuple_temp)
-		print(i)
+		
 	debuttriangle=nb_point+compteur+4
 	nb_triangle=int(liste_lines[debuttriangle].rstrip("\n\r"))
 	liste_triangle=[]

@@ -1,8 +1,11 @@
 
 # -*- coding: utf-8 -*-
 import numpy as np
-def createVisu(X, posPoints, triangles): # X champ scalaire
-	file = open("out.vtu","w")
+from generateWithParaview import generate_image
+
+def createVisu(X, posPoints, triangles,alpha): # X champ scalaire
+	nomfichier="OutputVtu/out_alpha="+str(alpha)+".vtu"
+	file = open(nomfichier,"w")
 	file.write('<VTKFile type="UnstructuredGrid" version="1.0" byte_order="LittleEndian" header_type="UInt64">\n')
 	file.write("<UnstructuredGrid>\n")
 	file.write('<Piece NumberOfPoints="' + str(len(posPoints))+'" NumberOfCells="'+str(len(triangles))+'">\n')
@@ -41,3 +44,4 @@ def createVisu(X, posPoints, triangles): # X champ scalaire
 
 	file.write('</PointData>\n</Piece>\n</UnstructuredGrid>\n</VTKFile>\n')
 	file.close()
+	generate_image(nomfichier)
