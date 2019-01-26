@@ -29,4 +29,3 @@ plot(ure, wait = true, cmm = "Solution", value = true, fill = true, dim = 2);
 gmshExport(Th, uh[], "uh.pos");
 gmshExport(Th, ure[], "ure.pos");
 gmshExport(Th, uabs[], "uabs.pos");
-

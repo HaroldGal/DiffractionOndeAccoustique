@@ -1,9 +1,9 @@
 
 // Parameters
 int nbseg=50;
-real R=1, xc=0, yc=0, R2=R/2;
+real R=3, xc=0, yc=0, R2=1;
 real k=6;
-real alpha=pi;
+real alpha=0;
 
 
 // border

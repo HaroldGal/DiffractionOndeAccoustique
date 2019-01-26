@@ -1,5 +1,5 @@
 Mesh.MshFileVersion = 2.2;
-h=1/30;
+h=1/10;
 
 /*
 Point(1) = {-1/8,-1/8,0,h};
@@ -9,19 +9,19 @@ Point(4) = {1/8,-1/8,0,h};
 */
 
 Point(11) = {0, 0, 0, h};
-Point(12) = {-1/8, 0, 0, h};
-Point(13) = {0, -1/8, 0, h};
-Point(14) = {1/8, 0, 0, h};
-Point(15) = {0, 1/8, 0, h};
+Point(12) = {-1/4, 0, 0, h};
+Point(13) = {0, -1/4, 0, h};
+Point(14) = {1/4, 0, 0, h};
+Point(15) = {0, 1/4, 0, h};
 
 
 Point(5) = {0,0,0,h};
 Point(6) = {2,0,0,h};
 
-Point(7) = {0,-0.5,0,h};
-Point(8) = {-1,0,0,h};
-Point(9) = {0,0.5,0,h};
-Point(10) = {1,0,0,h};
+Point(7) = {0,-1,0,h};
+Point(8) = {-3,0,0,h};
+Point(9) = {0,1,0,h};
+Point(10) = {3,0,0,h};
 
 /*
 Line(1) = {1,2};
@@ -46,4 +46,3 @@ Plane Surface(2) = {1,2};
 Physical Surface(1) = {2};
 Physical Line(2) = {1, 2, 3, 4};
 Physical Line(3) = {5, 6, 7, 8};
-
