@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from LectureFichier import lectureFichier
 from creationMatrix import Solver
 from creationFileParaview import createVisu
@@ -16,7 +18,7 @@ if (len(sys.argv)==4):
 	alpha=float(sys.argv[3])
 
 
-if (sys.argv[1]==1):
+if (int(sys.argv[1])==1):
 	Elem.creationMatriceMasseHelmholtz(k,alpha)
 	Elem.creationMatriceMasseBordHelmholtz(k,alpha)
 	Elem.creationMatriceRigidite()
