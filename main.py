@@ -18,16 +18,18 @@ if (len(sys.argv)==4):
 	alpha=float(sys.argv[3])
 
 
-if (int(sys.argv[1])==1):
-	Elem.creationMatriceMasseHelmholtz(k,alpha)
-	Elem.creationMatriceMasseBordHelmholtz(k,alpha)
-	Elem.creationMatriceRigidite()
-	#Elem.creationVecteurB()
-	Elem.creationVecteurBHelmholtz(k,alpha)
-	Elem.creationMatriceAHelmholtz()
-	Elem.newsolve(k,alpha)
-	createVisu(Elem.U, liste_position,liste_triangle,alpha)
-else:
+if (int(sys.argv[1])==2):
+	for ki in np.arange(1,60,1):
+		Elem.creationMatriceMasseHelmholtz(ki,alpha)
+		Elem.creationMatriceMasseBordHelmholtz(ki,alpha)
+		Elem.creationMatriceRigidite()
+		#Elem.creationVecteurB()
+		Elem.creationVecteurBHelmholtz(ki,alpha)
+		Elem.creationMatriceAHelmholtz()
+		Elem.newsolve(ki,alpha)
+		createVisu(Elem.U, liste_position,liste_triangle,ki,alpha)
+	
+elif(int(sys.argv[1])==1):
 	for alphaI in np.arange(0,2*np.pi,0.1):
 		Elem.creationMatriceMasseHelmholtz(k,alphaI)
 		Elem.creationMatriceMasseBordHelmholtz(k,alphaI)
@@ -36,7 +38,15 @@ else:
 		Elem.creationVecteurBHelmholtz(k,alphaI)
 		Elem.creationMatriceAHelmholtz()
 		Elem.newsolve(k,alphaI)
-		createVisu(Elem.U, liste_position,liste_triangle,alphaI)
+		createVisu(Elem.U, liste_position,liste_triangle,k,alphaI)
 
 
-
+else:
+	Elem.creationMatriceMasseHelmholtz(k,alpha)
+	Elem.creationMatriceMasseBordHelmholtz(k,alpha)
+	Elem.creationMatriceRigidite()
+	#Elem.creationVecteurB()
+	Elem.creationVecteurBHelmholtz(k,alpha)
+	Elem.creationMatriceAHelmholtz()
+	Elem.newsolve(k,alpha)
+	createVisu(Elem.U, liste_position,liste_triangle,alpha)

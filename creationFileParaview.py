@@ -3,8 +3,8 @@
 import numpy as np
 from generateWithParaview import generate_image
 
-def createVisu(X, posPoints, triangles,alpha): # X champ scalaire
-	nomfichier="OutputVtu/out_alpha="+str(alpha)+".vtu"
+def createVisu(X, posPoints, triangles,k,alpha): # X champ scalaire
+	nomfichier="OutputVtu/out_k="+str(k)+"_alpha="+str(round(alpha,2))+".vtu"
 	file = open(nomfichier,"w")
 	file.write('<VTKFile type="UnstructuredGrid" version="1.0" byte_order="LittleEndian" header_type="UInt64">\n')
 	file.write("<UnstructuredGrid>\n")

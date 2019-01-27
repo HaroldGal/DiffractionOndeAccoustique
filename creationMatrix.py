@@ -62,7 +62,7 @@ class Solver:
 				for j in range(len(K)):
 					row_ind.append(K[i])
 					col_ind.append(K[j])
-					mydata=np.complex(0,1)*k*sigma/6* (2 if i==j else 1)
+					mydata=-np.complex(0,1)*k*sigma/6* (2 if i==j else 1)
 					data.append(mydata)
 
 		self.Mbord = coo_matrix((array(data), (array(row_ind), array(col_ind))), shape=(len(self.points),len(self.points))).tocsr()

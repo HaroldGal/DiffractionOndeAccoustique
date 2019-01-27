@@ -1,5 +1,5 @@
 Mesh.MshFileVersion = 2.2;
-h=1/8;
+h=(2*Pi)/(15*3);
 
 /*
 Point(1) = {-1/8,-1/8,0,h};
