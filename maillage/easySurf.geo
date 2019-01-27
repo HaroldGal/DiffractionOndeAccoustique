@@ -1,5 +1,5 @@
 Mesh.MshFileVersion = 2.2;
-h=1/3;
+h=1/8;
 
 /*
 Point(1) = {-1/8,-1/8,0,h};
@@ -107,5 +107,6 @@ Line Loop(1) = {1,19,18,17,10,11,12,13,14,15,16,2,3,4,5,6,7,8,9};
 Line Loop(2) = {105,106,107,108};
 Plane Surface(2) = {1,2};
 Physical Surface(1) = {2};
-Physical Line(2) = {1, 2, 3, 4};
+//Physical Line(2) = {1, 2, 3, 4};
+Physical Line(2) = {1,19,18,17,10,11,12,13,14,15,16,2,3,4,5,6,7,8,9};
 Physical Line(3) = {105, 106, 107, 108};

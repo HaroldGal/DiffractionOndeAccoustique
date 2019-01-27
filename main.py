@@ -12,7 +12,7 @@ Elem = Solver(liste_triangle,liste_position,bords_in,bords_out)
 #3 argument 1 si on veut générer pour un seul alpha ou un seul k auquel cas il faut choisir alpha et k, 0 si on veut 0 si on veut plusieurs alpha pour k fixé
 
 alpha=np.pi
-k=10
+k=3
 if (len(sys.argv)==4):
 	k=float(sys.argv[2])
 	alpha=float(sys.argv[3])
