@@ -132,6 +132,7 @@ class Solver:
 		#on recupere la solution
 		self.U  = np.linalg.solve((self.A).toarray(), self.b)
 		#on recree le champ physique en parcourant tous les points
+		
 		for i  in range(len(self.points)):
 			(x1,x2,x3)=self.points[i]
 			self.U[i]=abs(self.U[i]+uinc(x1,x2,k,alpha))

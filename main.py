@@ -19,7 +19,7 @@ if (len(sys.argv)==4):
 
 
 if (int(sys.argv[1])==2):
-	for ki in np.arange(1,60,1):
+	for ki in np.arange(0.5,4,0.1):
 		Elem.creationMatriceMasseHelmholtz(ki,alpha)
 		Elem.creationMatriceMasseBordHelmholtz(ki,alpha)
 		Elem.creationMatriceRigidite()
