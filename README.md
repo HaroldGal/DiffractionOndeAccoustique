@@ -6,12 +6,12 @@ Dans ce repertroire vous trouverez trois programmes principaux piloté par un fi
 En plus des différents programmes on trouvera un dossier **maillage** qui va contenir notre sous-marin au format geo ainsi que son maillage au format msh. On trouvera également dans ce dossier des programmes destinés à FreeFem++ pour vérification de nos résultats.
 
 ## Lancement
-Pour utiliser nos programmes, il faut lancer le main avec 3 arguments dont 2 optionnels;
+Pour utiliser nos programmes, il faut lancer le main avec 3 arguments dont 2 optionnels :
 
-### Premier argument correspondant à ce que l'on souhaite générer : 
-#### 1 : Génère pour un nombre d'onde k fixé, plusieurs output en faisant varier l'angle d'incidence *alpha* entre 0 et 2*Pi*
-#### 2 : Génère pour un angle d'incidence fixé, plusieurs output en faisant varier l'angle d'incidence k entre 0.5 et 4
-#### 0 : Génère un seul output pour un angle et un nombre d'onde donné en arguments optionnels.
+##### Premier argument correspondant à ce que l'on souhaite générer : 
+###### 1 : Génère pour un nombre d'onde k fixé, plusieurs output en faisant varier l'angle d'incidence *alpha* entre 0 et 2 *Pi*
+###### 2 : Génère pour un angle d'incidence fixé, plusieurs output en faisant varier l'angle d'incidence k entre 0.5 et 4
+###### 0 : Génère un seul output pour un angle et un nombre d'onde donné en arguments optionnels.
 
-## Dans le cas 0 le deuxième argument est k
-## Dans le cas 0 le troisième argument est *alpha*
+##### Dans le cas 0 le deuxième argument est k
+##### Dans le cas 0 le troisième argument est *alpha*
