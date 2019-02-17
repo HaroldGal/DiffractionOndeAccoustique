@@ -15,11 +15,11 @@ En plus des différents programmes on trouvera un dossier **maillage** qui va co
 
 L'application s'utilise avec python 2.7.
 Pour le maillage :
-GMSH[http://gmsh.info/] - Dispensable si vous utilisez notre maillage prédefini
+* [GMSH](http://gmsh.info/) - Dispensable si vous utilisez notre maillage prédefini
 Pour les visualisations :
-Paraview[https://www.paraview.org/] - Indispensable pour la visualisation
+* [Paraview](https://www.paraview.org/) - Indispensable pour la visualisation
 Pour les calculs formels de verifications :
-Freefem++[https://freefem.org/] - Dispensable si vous faites confiance a notre solveur
+* [Freefem++](https://freefem.org/) - Dispensable si vous faites confiance a notre solveur
 
 ## Lancement
 Pour utiliser nos programmes, il faut lancer le main avec 3 arguments dont 2 optionnels :
